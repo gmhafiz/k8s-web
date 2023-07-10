@@ -1,6 +1,11 @@
-<script  lang="ts">
+<script lang="ts">
 
 import {defineComponent} from "vue";
+
+interface Random {
+  id: number,
+  name: string
+}
 
 export default defineComponent({
   mounted() {
@@ -8,9 +13,9 @@ export default defineComponent({
   },
   data() {
     return {
-      randoms: [],
+      randoms: [] as Random[],
 
-      address:'http://localhost:3081'
+      address: 'http://localhost:3080'
     }
   },
   methods: {
@@ -26,12 +31,12 @@ export default defineComponent({
       fetch(`${this.address}/randoms`, {
         method: "POST"
       })
-        .then(() => {
-          this.get()
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+          .then(() => {
+            this.get()
+          })
+          .catch((err) => {
+            console.error(err)
+          })
     }
   }
 })
@@ -51,7 +56,11 @@ export default defineComponent({
 
     Last 10 Random UUID
 
-    <div v-for="item in randoms" :key="item.id" style="display: flex; font-family: monospace ">
+    <div
+        v-for="item in randoms"
+        :key="item.id"
+        style="display: flex; font-family: monospace"
+    >
       <div style="min-width: 1.5rem;">
         {{ item.id }}
       </div>

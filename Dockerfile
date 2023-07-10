@@ -1,8 +1,6 @@
 # docker build -t gmhafiz/web .
 FROM node:18 as build-stage
 
-RUN npm install -g http-server
-
 WORKDIR /app
 
 COPY package*.json ./
